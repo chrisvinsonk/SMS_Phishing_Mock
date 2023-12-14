@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 80px;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      color: #ffffff;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .form-check-label i {
+      font-size: 20px;
+      margin-right: 12px;
+    }
+
+    .form-check-input {
+      margin-right: 8px;
+    }
+
+    .form-check-label {
+      font-size: 18px;
+    }
+
+    .payment-option {
+      margin-bottom: 20px;
+    }
+
+    .input-section {
+      display: none;
+      background-color: #f8f9fa;
+      border: 1px solid #ced4da;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 15px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Secure Payment Gateway</h1>
+  </header>
+
+  <div class="container">
+    
+    <!-- <form action="" method="post"> -->
+    <form action="process_payment.php" method="post">
+      <div class="form-group">
+        <label class="d-block">Choose One Payment Option:</label>
+
+        <div class="form-row">
+          <div class="col-12 col-sm-6 col-md-4 mb-3 payment-option">
+            <div class="form-check d-flex align-items-center">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="card" value="card">
+              <label class="form-check-label ml-2" for="card">
+                <i class="fas fa-credit-card"></i> Credit & Debit Cards
+              </label>
+            </div>
+            <div class="input-section" id="cardDetails">
+              <label for="cardNumber">Card Number:</label>
+              <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Enter card number" required>
+
+              <label for="expiryDate">Expiry Date:</label>
+              <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+
+              <label for="cvv">CVV:</label>
+              <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter CVV" required>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-4 mb-3 payment-option">
+            <div class="form-check d-flex align-items-center">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="upi" value="upi">
+              <label class="form-check-label" for="upi">
+                <i class="fas fa-mobile-alt"></i> UPI
+              </label>
+            </div>
+            <div class="input-section" id="upiDetails">
+              <label for="upiProvider">Select UPI Provider:</label>
+              <select class="form-control" id="upiProvider" name="upiProvider">
+                <option value="gpay">Google Pay (GPAY)</option>
+                <option value="paytm">Paytm</option>
+                <option value="phonepe">PhonePe</option>
+                <option value="amazonpay">Amazon Pay</option>
+              </select>
+
+              <label for="upiID">UPI ID:</label>
+              <input type="text" class="form-control" id="upiID" name="upiID" placeholder="Enter UPI ID" required>
+
+              <label for="upiPIN">UPI PIN:</label>
+              <input type="password" class="form-control" id="upiPIN" name="upiPIN" placeholder="Enter UPI PIN" required>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-4 mb-3 payment-option">
+            <div class="form-check d-flex align-items-center">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="wallet" value="wallet">
+              <label class="form-check-label" for="wallet">
+                <i class="fas fa-wallet"></i> Wallets (Paytm, PhonePe, Amazon Pay, etc.)
+              </label>
+            </div>
+            <div class="input-section" id="walletDetails">
+              <label for="phoneNumber">Phone Number:</label>
+              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number" required>
+
+              <label for="walletPasscode">Wallet Passcode:</label>
+              <input type="password" class="form-control" id="walletPasscode" name="walletPasscode" placeholder="Enter wallet passcode" required>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-4 mb-3 payment-option">
+            <div class="form-check d-flex align-items-center">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="additionalOption" value="additional">
+              <label class="form-check-label" for="additionalOption">
+                <i class="fas fa-wallet"></i> Additional Payment Option
+              </label>
+            </div>
+            <div class="input-section" id="additionalOptionDetails">
+              <!-- Additional input fields for the new payment option -->
+              <label for="additionalOptionField">Additional Field:</label>
+              <input type="text" class="form-control" id="additionalOptionField" name="additionalOptionField" placeholder="Enter additional information" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-success" onclick="processPayment()">Pay Now</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2023 SafePay Org. All rights reserved.
+  </footer>
+
+  <!-- Bootstrap JS and Popper.js CDN -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Font Awesome CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+  <!-- Your existing HTML code remains unchanged -->
+
+<script>
+    document.querySelectorAll('input[type=radio]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        var cardDetails = document.getElementById("cardDetails");
+        var upiDetails = document.getElementById("upiDetails");
+        var walletDetails = document.getElementById("walletDetails");
+        var additionalOptionDetails = document.getElementById("additionalOptionDetails");
+  
+        cardDetails.style.display = "none";
+        upiDetails.style.display = "none";
+        walletDetails.style.display = "none";
+        additionalOptionDetails.style.display = "none";
+  
+        if (this.value === "card") {
+          cardDetails.style.display = "block";
+        } else if (this.value === "upi") {
+          upiDetails.style.display = "block";
+        } else if (this.value === "wallet") {
+          walletDetails.style.display = "block";
+        } else if (this.value === "additional") {
+          additionalOptionDetails.style.display = "block";
+        }
+      });
+    });
+  
+    function processPayment() {
+      // Display a confirmation message (you can add more logic here)
+      alert("Payment processed successfully!");
+    }
+  </script>
+
+</body>
+</html>
